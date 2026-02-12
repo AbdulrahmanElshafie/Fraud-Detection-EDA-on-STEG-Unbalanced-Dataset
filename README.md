@@ -1,60 +1,100 @@
-# Fraud Detection & EDA on STEG Dataset  (Unbalanced Data) 
+# Fraud Detection on Unbalanced Data: An EDA-Driven Walkthrough
+
+> This repo is a **learning artifact**, not a production system.
+> The goal is to show *how to think* about fraud detection when the data is skewed, the signal is faint, and metrics can easily mislead.
+
+---
 
 ## Project Overview
 
-### Abstract:
-The main goal of this project is to make you feel familiar with Supervised Learning
-Algorithms like Regression and Gradient Boosting algorithms along with practicing
-more Exploratory Data Analysis techniques and developing your ML intuition.
+### Purpose
 
-### Description:
-The Tunisian Company of Electricity and Gas (STEG) is a public and 
-non-administrative company, it is responsible for delivering electricity and gas across
-Tunisia. The company suffered tremendous losses in the order of 200 million Tunisian
-Dinars due to fraudulent manipulations of meters by consumers.
-Using the client’s billing history, the challenge aims to detect and recognize
-clients involved in fraudulent activities.
-The solution will enhance the company’s revenues and reduce the losses caused by
-such fraudulent activities.
+Fraud detection is deceptively hard. In the **STEG dataset**, fraud cases are rare, making naive modeling approaches and accuracy metrics misleading. This project emphasizes:
 
-### Data Problem:
-Building a model that will help classify which customer is likely to commit fraud by
-that saves the company from making losses.
+* Understanding data through Exploratory Data Analysis (EDA)
+* Handling imbalanced datasets thoughtfully
+* Making preprocessing and modeling decisions grounded in insight, not blindly chasing metrics
+* Evaluating models with metrics that reflect operational value
 
-## Dataset
-### Data Issues:
-- Imbalanced Dataset with around 20% for class 1 and 80% for class 0
-- Training set and test set each have a different distribution
-- The dataset is not normally distributed 
-- Training and test sets have different amounts of each class in it as training includes around 8% of class 1 and 92% of class 0 while the test set includes 50% for each class
+The focus is on *learning and intuition*, rather than producing a deployable system.
 
-### Data Preprocessing
-- Removing mistaken values, null values, and useless features like client ID, etc 
-- Normalizing the following features as they’re the ones that need normalization: 
-  - Consommation_level_1
-  - Consommation_level_2
-  - Consommation_level_3
-  - Consommation_level_4
-  - Old_index
-  - New_index
-- Merge training and testing sets and then split them again to solve different distribution issues  
-- Apply undersampling to solve imbalance on the whole dataset issue
-- Applying label smoothing to improve model performance potentially.
+### Context
 
-## Results 
-We tested a list of different model and different types, the models we tried were:
-- Gradient Boosting Classifier
-- Decision Tree Classifier
-- Logistic Regression
-- Cat Boost Classifier
-- Ada Boost Classifier
+The **Tunisian Company of Electricity and Gas (STEG)** suffered significant financial losses due to meter fraud. Using billing history, the task is to identify customers likely to commit fraud. This dataset provides a realistic scenario for exploring imbalance, feature skew, and subtle signals.
 
-The results determined that the best model was Decision Tree Classifier, it achieved a results as follow:
-- **Precision** 0.849
-- **Recall** 0.852
-- **Accuracy** 0.850
+---
 
+## Dataset Insights
 
+### Challenges
 
+* Highly **imbalanced classes** (fraud is rare)
+* Non-normal distributions and skewed features
+* Different class distributions in training vs. test sets
+* Outliers and noisy data that can dominate naive models
 
+### EDA Takeaways
 
+EDA isn’t a formality—it’s the first modeling tool:
+
+* Visualizing target distribution reframes the task: **we’re hunting needles in a haystack**
+* Feature distributions reveal subtle shifts unique to fraud cases
+* Early insights guide preprocessing, model choice, and evaluation metrics
+
+---
+
+## Preprocessing & Feature Decisions
+
+* Removed mistaken or useless features (e.g., client ID)
+* Normalized selected features sensitive to scale (e.g., consumption levels, indices)
+* Merged training and test sets, then split again to mitigate distribution differences
+* Applied **undersampling** to address imbalance
+* Explored **label smoothing** to potentially improve model stability
+* Every step evaluated to avoid **data leakage**, a critical risk in fraud detection
+
+---
+
+## Modeling & Evaluation
+
+### Models Explored
+
+* Logistic Regression
+* Decision Tree Classifier
+* Gradient Boosting Classifier
+* CatBoost Classifier
+* AdaBoost Classifier
+
+### Evaluation Philosophy
+
+* Accuracy alone is misleading—rare classes make it feel good without operational value
+* Precision, recall, and precision–recall curves guide decision-making
+* Baseline models help understand what “honest improvement” looks like
+
+### Notable Result
+
+The **Decision Tree Classifier** performed predictably and interpretable:
+
+* Precision: 0.849
+* Recall: 0.852
+* Accuracy: 0.850
+
+More complex models sometimes improved metrics but reduced trust—illustrating that **better-looking numbers don’t always equal better models**.
+
+---
+
+## Lessons Learned
+
+* EDA can invalidate assumptions before modeling begins
+* Simple, well-understood models often outperform complex ones in trust and stability
+* Handling imbalance requires **trade-offs** and operational context
+* More labeled fraud data, time-aware validation, and cost-sensitive evaluation would meaningfully change the approach
+
+---
+
+## Reproducibility & Next Steps
+
+* Notebooks are designed to be run top-to-bottom and read like a narrative
+* **[GitHub Repo Link]** – treat as a learning resource, not a deployment guide
+* Production-ready fraud detection systems require monitoring, feedback loops, concept drift detection, and human-in-the-loop review
+
+This repo is a **map for thinking**, not a system to ship.
