@@ -94,7 +94,7 @@ More complex models sometimes improved metrics but reduced trust—illustrating 
 ## Reproducibility & Next Steps
 
 * Notebooks are designed to be run top-to-bottom and read like a narrative
-* **[GitHub Repo Link]** – treat as a learning resource, not a deployment guide
+* **[This Repo](https://github.com/AbdulrahmanElshafie/Fraud-Detection-EDA-on-STEG-Unbalanced-Dataset)** – treat as a learning resource, not a deployment guide
 * Production-ready fraud detection systems require monitoring, feedback loops, concept drift detection, and human-in-the-loop review
 
 This repo is a **map for thinking**, not a system to ship.
